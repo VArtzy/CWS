@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stddef.h>
 #include <stdint.h>
 typedef struct {
@@ -43,3 +44,17 @@ typedef enum {
     CWS_OK = 0,
     CWS_ERROR_ERRNO = -1,
 } Cws_Error;
+
+typedef struct {
+    void *data;
+    int (*read)(void *data, void *buffer, size_t len);
+    int (*peek)(void *data, const void *buffer, size_t len);
+    int (*shutdown)(void *data, Cws_Shutdown_How how);
+    int (*close)(void *data, Cws_Shutdown_How how);
+} Cws_Socket;
+
+typedef struct {
+    Cws_Socket socket;
+    bool debug;
+    bool client;
+} Cws;
