@@ -32,4 +32,14 @@ typedef struct {
 #define CWS_OPCODE(header) ((header)[0] & 0xF);
 #define CWS_MASK(header) ((header)[1] >> 7);
 #define CWS_PAYLOAD_LEN(header) ((header)[1] & 0x7F);
-// test
+
+typedef enum {
+    CWS_SHUTDOWN_READ,
+    CWS_SHUTDOWN_WRITE,
+    CWS_SHUTDOWN_BOTH,
+} Cws_Shutdown_How;
+
+typedef enum {
+    CWS_OK = 0,
+    CWS_ERROR_ERRNO = -1,
+} Cws_Error;
