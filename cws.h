@@ -58,3 +58,14 @@ typedef struct {
     bool debug;
     bool client;
 } Cws;
+
+static int cws_socket_read_entire_buffer_raw(Cws_Socket socket, void *buffer, size_t len) {
+    char *buf = buffer;
+    while (len > 0) {
+        int n = socket.read(socket.data, buf, len);
+        if (n < 0) return n;
+        buf += n;
+        len -= n;
+    }
+    return 0;
+}
